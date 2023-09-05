@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class persona {
+    private String nombre;
+    private boolean caminando;
+
+    public persona(String nombre) {
+        this.nombre = nombre;
+        this.caminando = false;
+    }
+
+    public void caminar() {
+        caminando = true;
+        System.out.println(nombre + " está caminando.");
+    }
+
+    public void detenerse() {
+        caminando = false;
+        System.out.println(nombre + " se ha detenido.");
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Ingrese el nombre de la persona: ");
+        String nombre = scanner.nextLine();
+        persona persona = new persona(nombre);
+
+        while (true) {
+            System.out.print("Seleccione una acción (caminar, detenerse, salir): ");
+            String accion = scanner.nextLine();
+
+            switch (accion.toLowerCase()) {
+                case "caminar":
+                    if (!persona.caminando) {
+                        persona.caminar();
+                    } else {
+                        System.out.println(nombre + " ya está caminando.");
+                    }
+                    break;
+                case "detenerse":
+                    if (persona.caminando) {
+                        persona.detenerse();
+                    } else {
+                        System.out.println(nombre + " ya se ha detenido.");
+                    }
+                    break;
+                case "salir":
+                    System.out.println("Saliendo del programa.");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Acción no válida. Por favor, seleccione una acción válida.");
+            }
+        }
+    }
+}
